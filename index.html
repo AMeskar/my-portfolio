@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Black &amp; White</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Global Styles */
+    body { 
+      padding-top: 56px; /* Avoid content being hidden behind the navbar */
+      /* Set your background image below – it will appear behind the content sections */
+      background-image: url('/images/Background.jpg'); /* <-- Replace with your image path */
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Override Bootstrap button colors for a Black &amp; White theme */
+    .btn-primary {
+      background-color: black;
+      border-color: black;
+      color: white;
+    }
+    .btn-secondary {
+      background-color: white;
+      border-color: black;
+      color: black;
+    }
+    .btn-outline-primary {
+      color: black;
+      border-color: black;
+    }
+    .btn-outline-primary:hover {
+      background-color: black;
+      color: white;
+      border-color: black;
+    }
+    
+    /* Navbar (remains dark with white links) */
+    .navbar {
+      box-shadow: 0 2px 5px rgba(0,0,0,0);
+    }
+    .navbar-nav .nav-link {
+      color: white;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #f8f9fa;
+    }
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        background-color: #000000;
+      }
+    }
+    
+    /* Section Styles: White background with black text for most sections */
+    .about-section, .projects-section, .skills-section {
+      background-color: white;
+      color: rgb(0, 0, 0);
+    }
+    .contact-section {
+      background-color: rgb(62, 62, 62);
+      color: white;
+    }
+    
+    /* About Section */
+    .about-section {
+      text-align: center;
+      padding: 50px 0;
+    }
+    .about-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: black;
+    }
+    .about-section img {
+      width: 200px; /* Adjust as needed */
+      height: 200px;
+      border-radius: 50%; /* Circular image */
+      margin-bottom: 20px;
+    }
+    .about-section p {
+      color: black;
+    }
+    
+    /* Projects Section */
+    .projects-section h2 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      color: black;
+    }
+    .projects-section .card {
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .projects-section .card-img-top {
+      max-height: 180px;
+      object-fit: cover;
+    }
+    .projects-section .card-body {
+      padding: 15px;
+    }
+    .projects-section .card-title {
+      font-size: 1.25rem;
+    }
+    .projects-section .card-text {
+      margin-bottom: 15px;
+    }
+    
+    /* Skills Section */
+    .skills-section h2 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      color: black;
+    }
+    .skills-section .card {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .skills-section .card-img-top {
+      padding: 20px;
+      background-color: #f8f9fa;
+      height: 180px;
+      object-fit: contain;
+    }
+    .skills-section .card-body {
+      padding: 15px;
+    }
+    .skills-section .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      padding: 50px 0;
+    }
+    .contact-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+    .contact-section p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .social-icon {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+    .social-icon:hover {
+      opacity: 0.7;
+    }
+    .contact-section a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .contact-section a:hover {
+      color: #ddd;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2>About</h2>
+      <img src="images/about/animated_icon.jpeg" alt="About Me">
+      <p>My name is <mark>Amine Meskar</mark>. I am a Ph.D-level <mark>data scientist</mark> with a strong background in statistics, calculus, and advanced deep learning algorithms. I’m not just interested in problem-solving for its own sake; I want to navigate <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data as a <mark>river of time</mark>, and tools as the boat that lets us travel through it. Yet, it’s the right mindset and correct thinking mechanism that enables us to <mark>see through the past and glimpse the future</mark>.</p>
+      <p>I learn and study more so I can begin <mark>developing new frameworks</mark> for handling various data types and formats, including any variables they encompass. Ultimately, my goal is to <mark>create AI models</mark> that not only uncover hidden insights but also foresee how events might unfold—offering new directions for significant decisions that <mark>impact companies and individuals</mark>.</p>
+      <p>Through critical and analytical thinking, I value continuous learning and openness to constructive criticism, both of which support ongoing growth. I trust in my ability to tackle uncertainty and complex challenges with confidence, using both foundational methods and forward-thinking approaches. <mark>In my view</mark>, a successful data scientist is knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a <mark>prophet</mark>.</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <h2 class="text-center">Projects</h2>
+      <div class="row">
+        <!-- Project 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="images/projects/1.jpg" class="card-img-top" alt="Project 1">
+            <div class="card-body">
+              <h5 class="card-title">Data Classification</h5>
+              <p class="card-text">This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.</p>
+              <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-primary">Readme</a>
+              <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-secondary">Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="images/projects/3.png" class="card-img-top" alt="Project 2">
+            <div class="card-body">
+              <h5 class="card-title">Predictive modeling</h5>
+              <p class="card-text">his repository contains all code and documentation related to reconstructing neutrino energy from simulated data using various machine learning (ML) models and deep learning architectures. The goal is to predict neutrino energy from truth-level features and compare different ML approaches.</p>
+              <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-primary">Readme</a>
+              <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-secondary">Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="images/projects/2.jpg" class="card-img-top" alt="Project 3">
+            <div class="card-body">
+              <h5 class="card-title">Signal Processing</h5>
+              <p class="card-text">This repository demonstrates a Singular Spectrum Analysis (SSA) approach for time series decomposition. In particular, we showcase how SSA can help separate a signal into trend, periodic components, and noise by embedding the series into a matrix, and reconstructing meaningful components.</p>
+              <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-primary">Readme</a>
+              <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-secondary">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills-section">
+    <div class="container">
+      <h2 class="text-center">Skills</h2>
+      <div class="row">
+        <!-- Skill 1 -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img src="images/skills/1.png" class="card-img-top" alt="Python">
+            <div class="card-body">
+              <h5 class="card-title">Python</h5>
+              <p class="card-text">Python is my <mark>all-in-one tool</mark> for data science, covering everything from data manipulation <mark>(pandas, NumPy)</mark> to machine learning <mark>(scikit-learn, TensorFlow)</mark> and time series analysis <mark>(statsmodels, prophet)</mark>. It simplifies data preprocessing, visualization, and modeling, making it easy to explore insights, build predictive models, and automate workflows. Its extensive ecosystem and flexibility make it indispensable for tackling any data-driven problem efficiently.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Skill 2 -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img src="images/skills/2.png" class="card-img-top" alt="Data Visualization">
+            <div class="card-body">
+              <h5 class="card-title">Data Visualization</h5>
+              <p class="card-text">Data visualization is essential for </mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Skill 3 -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img src="images/skills/3.jpg" class="card-img-top" alt="SQL">
+            <div class="card-body">
+              <h5 class="card-title">Machine Learning</h5>
+              <p class="card-text"> <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy,</p>
+            </div>
+          </div>
+        </div>
+          <!-- Skill 5 -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+              <img src="images/skills/5.png" class="card-img-top" alt="Data Storytelling">
+              <div class="card-body">
+                <h5 class="card-title">Cloud Tech (AWS)</h5>
+                <p class="card-text">AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Me Section -->
+  <section id="contact" class="contact-section text-center">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <p><i class="E-mail"></i> Meskaramine2@gmail.com</p>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <a href="https://linkedin.com/in/amine-meskar" target="_blank">
+            <img src="icons/linkedin.png" alt="LinkedIn" class="social-icon">
+            LinkedIn
+          </a>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <a href="https://github.com/AMeskar" target="_blank">
+            <img src="icons/github.png" alt="GitHub" class="social-icon">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Portfolio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Chatbot Floating Button (opens the Chatbot modal) -->
+  <button id="openChat" class="btn btn-dark" data-toggle="modal" data-target="#chatModal">Chat</button>
+
+  <!-- Chatbot Modal -->
+  <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="chatModalLabel">Chatbot</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- Chat conversation will appear in this scrollable area -->
+        <div class="modal-body" id="chatBody" style="max-height:300px; overflow-y:auto;">
+          <!-- Chat messages will be dynamically added here -->
+        </div>
+        <div class="modal-footer">
+          <input type="text" id="chatInput" class="form-control" placeholder="Type your message...">
+          <button type="button" id="sendChat" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <!-- Use the full version of jQuery (not slim) for AJAX support -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Chatbot JavaScript: This code sends the user message to your Python backend at "/chatbot" -->
+  <script>
+    $(document).ready(function(){
+      // When the Send button is clicked
+      $("#sendChat").click(function(){
+        var userMessage = $("#chatInput").val();
+        if(userMessage.trim() === "") return;
+        
+        // Append the user's message to the chat window
+        $("#chatBody").append('<div class="text-right mb-2"><span class="badge badge-secondary">You: ' + userMessage + '</span></div>');
+        $("#chatInput").val('');
+        
+        // Send the user's message to the Python backend (you must implement this endpoint)
+        $.ajax({
+          url: "/chatbot", // Ensure your Python backend listens at this URL
+          type: "POST",
+          data: JSON.stringify({ message: userMessage }),
+          contentType: "application/json",
+          success: function(response){
+            // Expecting a JSON response with a property "reply"
+            $("#chatBody").append('<div class="text-left mb-2"><span class="badge badge-primary">Bot: ' + response.reply + '</span></div>');
+            $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight);
+          },
+          error: function(){
+            $("#chatBody").append('<div class="text-left mb-2"><span class="badge badge-danger">Bot: Sorry, something went wrong.</span></div>');
+          }
+        });
+      });
+      
+      // Allow sending a message by pressing the Enter key
+      $("#chatInput").keypress(function(e){
+        if(e.which == 13){
+          $("#sendChat").click();
+          return false; // Prevent form submission
+        }
+      });
+    });
+  </script>
+</body>
+</html>
