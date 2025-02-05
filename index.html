@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     /* Global Styles */
-    body { 
+    body {
       padding-top: 56px; /* Avoid content being hidden behind the navbar */
       /* Set your background image below – it will appear behind the content sections */
       background-image: url('/images/Background.jpg'); /* <-- Replace with your image path */
@@ -20,8 +20,14 @@
     html {
       scroll-behavior: smooth;
     }
-    
-    /* Override Bootstrap button colors for a Black &amp; White theme */
+
+    /* For right-to-left text (Arabic) */
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* Override Bootstrap button colors for a Black & White theme */
     .btn-primary {
       background-color: black;
       border-color: black;
@@ -41,7 +47,7 @@
       color: white;
       border-color: black;
     }
-    
+
     /* Navbar (remains dark with white links) */
     .navbar {
       box-shadow: 0 2px 5px rgba(0,0,0,0);
@@ -57,7 +63,7 @@
         background-color: #000000;
       }
     }
-    
+
     /* Section Styles: White background with black text for most sections */
     .about-section, .projects-section, .skills-section {
       background-color: white;
@@ -67,7 +73,7 @@
       background-color: rgb(62, 62, 62);
       color: white;
     }
-    
+
     /* About Section */
     .about-section {
       text-align: center;
@@ -87,12 +93,13 @@
     .about-section p {
       color: black;
     }
-    
+
     /* Projects Section */
     .projects-section h2 {
       margin-bottom: 40px;
       font-size: 2.5rem;
       color: black;
+      text-align: center;
     }
     .projects-section .card {
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -110,12 +117,16 @@
     .projects-section .card-text {
       margin-bottom: 15px;
     }
-    
+
     /* Skills Section */
+    .skills-section {
+      padding-bottom: 30px;
+    }
     .skills-section h2 {
       margin-bottom: 40px;
       font-size: 2.5rem;
       color: black;
+      text-align: center;
     }
     .skills-section .card {
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -133,10 +144,11 @@
       font-size: 1.25rem;
       margin-bottom: 15px;
     }
-    
+
     /* Contact Section */
     .contact-section {
       padding: 50px 0;
+      text-align: center;
     }
     .contact-section h2 {
       font-size: 2.5rem;
@@ -167,29 +179,65 @@
 </head>
 <body>
 
+  <!-- Language Selector -->
+  <div class="container text-right mt-3">
+    <select id="languageSelector" class="custom-select w-auto">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <!-- Sticky Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home" id="nav-home">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about" id="nav-about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects" id="nav-projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills" id="nav-skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact" id="nav-contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   <!-- About Section -->
   <section id="about" class="about-section">
     <div class="container">
-      <h2>About</h2>
+      <h2 id="about-title">About</h2>
       <img src="images/about/animated_icon.jpeg" alt="About Me">
-      <p>My name is <mark>Amine Meskar</mark>. I am a Ph.D-level <mark>data scientist</mark> with a strong background in statistics, calculus, and advanced deep learning algorithms. I’m not just interested in problem-solving for its own sake; I want to navigate <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data as a <mark>river of time</mark>, and tools as the boat that lets us travel through it. Yet, it’s the right mindset and correct thinking mechanism that enables us to <mark>see through the past and glimpse the future</mark>.</p>
-      <p>I learn and study more so I can begin <mark>developing new frameworks</mark> for handling various data types and formats, including any variables they encompass. Ultimately, my goal is to <mark>create AI models</mark> that not only uncover hidden insights but also foresee how events might unfold—offering new directions for significant decisions that <mark>impact companies and individuals</mark>.</p>
-      <p>Through critical and analytical thinking, I value continuous learning and openness to constructive criticism, both of which support ongoing growth. I trust in my ability to tackle uncertainty and complex challenges with confidence, using both foundational methods and forward-thinking approaches. <mark>In my view</mark>, a successful data scientist is knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a <mark>prophet</mark>.</p>
+      <p id="about-p1">My name is <mark>Amine Meskar</mark>. I am a Ph.D-level <mark>data scientist</mark> with a strong background in statistics, calculus, and advanced deep learning algorithms. I’m not just interested in problem-solving for its own sake; I want to navigate <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data as a <mark>river of time</mark>, and tools as the boat that lets us travel through it. Yet, it’s the right mindset and correct thinking mechanism that enables us to <mark>see through the past and glimpse the future</mark>.</p>
+      <p id="about-p2">I learn and study more so I can begin <mark>developing new frameworks</mark> for handling various data types and formats, including any variables they encompass. Ultimately, my goal is to <mark>create AI models</mark> that not only uncover hidden insights but also foresee how events might unfold—offering new directions for significant decisions that <mark>impact companies and individuals</mark>.</p>
+      <p id="about-p3">Through critical and analytical thinking, I value continuous learning and openness to constructive criticism, both of which support ongoing growth. I trust in my ability to tackle uncertainty and complex challenges with confidence, using both foundational methods and forward-thinking approaches. <mark>In my view</mark>, a successful data scientist is knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a <mark>visionary</mark>.</p>
     </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
     <div class="container">
-      <h2 class="text-center">Projects</h2>
+      <h2 id="projects-title" class="text-center">Projects</h2>
       <div class="row">
         <!-- Project 1 -->
         <div class="col-md-4 mb-4">
           <div class="card">
             <img src="images/projects/1.jpg" class="card-img-top" alt="Project 1">
             <div class="card-body">
-              <h5 class="card-title">Data Classification</h5>
-              <p class="card-text">This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.</p>
+              <h5 class="card-title" id="project1-title">Data Classification</h5>
+              <p class="card-text" id="project1-text">This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.</p>
               <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-primary">Readme</a>
               <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-secondary">Source Code</a>
             </div>
@@ -200,8 +248,8 @@
           <div class="card">
             <img src="images/projects/3.png" class="card-img-top" alt="Project 2">
             <div class="card-body">
-              <h5 class="card-title">Predictive modeling</h5>
-              <p class="card-text">his repository contains all code and documentation related to reconstructing neutrino energy from simulated data using various machine learning (ML) models and deep learning architectures. The goal is to predict neutrino energy from truth-level features and compare different ML approaches.</p>
+              <h5 class="card-title" id="project2-title">Predictive modeling</h5>
+              <p class="card-text" id="project2-text">This repository contains all code and documentation related to reconstructing neutrino energy from simulated data using various machine learning (ML) models and deep learning architectures. The goal is to predict neutrino energy from truth-level features and compare different ML approaches.</p>
               <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-primary">Readme</a>
               <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-secondary">Source Code</a>
             </div>
@@ -212,8 +260,8 @@
           <div class="card">
             <img src="images/projects/2.jpg" class="card-img-top" alt="Project 3">
             <div class="card-body">
-              <h5 class="card-title">Signal Processing</h5>
-              <p class="card-text">This repository demonstrates a Singular Spectrum Analysis (SSA) approach for time series decomposition. In particular, we showcase how SSA can help separate a signal into trend, periodic components, and noise by embedding the series into a matrix, and reconstructing meaningful components.</p>
+              <h5 class="card-title" id="project3-title">Signal Processing</h5>
+              <p class="card-text" id="project3-text">This repository demonstrates a Singular Spectrum Analysis (SSA) approach for time series decomposition. In particular, we showcase how SSA can help separate a signal into trend, periodic components, and noise by embedding the series into a matrix, and reconstructing meaningful components.</p>
               <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-primary">Readme</a>
               <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-secondary">Source Code</a>
             </div>
@@ -226,15 +274,15 @@
   <!-- Skills Section -->
   <section id="skills" class="skills-section">
     <div class="container">
-      <h2 class="text-center">Skills</h2>
+      <h2 id="skills-heading" class="text-center">Skills</h2>
       <div class="row">
         <!-- Skill 1 -->
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
             <img src="images/skills/1.png" class="card-img-top" alt="Python">
             <div class="card-body">
-              <h5 class="card-title">Python</h5>
-              <p class="card-text">Python is my <mark>all-in-one tool</mark> for data science, covering everything from data manipulation <mark>(pandas, NumPy)</mark> to machine learning <mark>(scikit-learn, TensorFlow)</mark> and time series analysis <mark>(statsmodels, prophet)</mark>. It simplifies data preprocessing, visualization, and modeling, making it easy to explore insights, build predictive models, and automate workflows. Its extensive ecosystem and flexibility make it indispensable for tackling any data-driven problem efficiently.</p>
+              <h5 class="card-title" id="skill1-title">Python</h5>
+              <p class="card-text" id="skill1-text">Python is my <mark>all-in-one tool</mark> for data science, covering everything from data manipulation <mark>(pandas, NumPy)</mark> to machine learning <mark>(scikit-learn, TensorFlow)</mark> and time series analysis <mark>(statsmodels, prophet)</mark>. It simplifies data preprocessing, visualization, and modeling, making it easy to explore insights, build predictive models, and automate workflows. Its extensive ecosystem and flexibility make it indispensable for tackling any data-driven problem efficiently.</p>
             </div>
           </div>
         </div>
@@ -243,8 +291,8 @@
           <div class="card">
             <img src="images/skills/2.png" class="card-img-top" alt="Data Visualization">
             <div class="card-body">
-              <h5 class="card-title">Data Visualization</h5>
-              <p class="card-text">Data visualization is essential for </mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.</p>
+              <h5 class="card-title" id="skill2-title">Data Visualization</h5>
+              <p class="card-text" id="skill2-text">Data visualization is essential for <mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.</p>
             </div>
           </div>
         </div>
@@ -253,19 +301,19 @@
           <div class="card">
             <img src="images/skills/3.jpg" class="card-img-top" alt="SQL">
             <div class="card-body">
-              <h5 class="card-title">Machine Learning</h5>
-              <p class="card-text"> <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy,</p>
+              <h5 class="card-title" id="skill3-title">Machine Learning</h5>
+              <p class="card-text" id="skill3-text"> <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy.</p>
             </div>
           </div>
         </div>
-          <!-- Skill 5 -->
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card">
-              <img src="images/skills/5.png" class="card-img-top" alt="Data Storytelling">
-              <div class="card-body">
-                <h5 class="card-title">Cloud Tech (AWS)</h5>
-                <p class="card-text">AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.</p>
-              </div>
+        <!-- Skill 4 -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img src="images/skills/5.png" class="card-img-top" alt="Data Storytelling">
+            <div class="card-body">
+              <h5 class="card-title" id="skill4-title">Cloud Tech (AWS)</h5>
+              <p class="card-text" id="skill4-text">AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -273,9 +321,9 @@
   </section>
 
   <!-- Contact Me Section -->
-  <section id="contact" class="contact-section text-center">
+  <section id="contact" class="contact-section">
     <div class="container">
-      <h2>Contact Me</h2>
+      <h2 id="contact-title">Contact Me</h2>
       <div class="row justify-content-center">
         <div class="col-lg-4">
           <p><i class="E-mail"></i> Meskaramine2@gmail.com</p>
@@ -296,38 +344,8 @@
     </div>
   </section>
 
-  <!-- Sticky Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#home">Portfolio</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <!-- Chatbot Floating Button (opens the Chatbot modal) -->
-  <button id="openChat" class="btn btn-dark" data-toggle="modal" data-target="#chatModal">Chat</button>
+  <button id="openChat" class="btn btn-dark" data-toggle="modal" data-target="#chatModal" style="position: fixed; bottom: 20px; right: 20px;">Chat</button>
 
   <!-- Chatbot Modal -->
   <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
@@ -364,11 +382,11 @@
       $("#sendChat").click(function(){
         var userMessage = $("#chatInput").val();
         if(userMessage.trim() === "") return;
-        
+
         // Append the user's message to the chat window
         $("#chatBody").append('<div class="text-right mb-2"><span class="badge badge-secondary">You: ' + userMessage + '</span></div>');
         $("#chatInput").val('');
-        
+
         // Send the user's message to the Python backend (you must implement this endpoint)
         $.ajax({
           url: "/chatbot", // Ensure your Python backend listens at this URL
@@ -385,7 +403,7 @@
           }
         });
       });
-      
+
       // Allow sending a message by pressing the Enter key
       $("#chatInput").keypress(function(e){
         if(e.which == 13){
@@ -393,6 +411,170 @@
           return false; // Prevent form submission
         }
       });
+    });
+  </script>
+
+  <!-- JavaScript for Language Switching -->
+  <script>
+    const translations = {
+      en: {
+        // Navbar
+        "nav-home": "Home",
+        "nav-about": "About",
+        "nav-projects": "Projects",
+        "nav-skills": "Skills",
+        "nav-contact": "Contact",
+
+        // About
+        "about-title": "About",
+        "about-p1": "My name is <mark>Amine Meskar</mark>. I am a Ph.D-level <mark>data scientist</mark> with a strong background in statistics, calculus, and advanced deep learning algorithms. I’m not just interested in problem-solving for its own sake; I want to navigate <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data as a <mark>river of time</mark>, and tools as the boat that lets us travel through it. Yet, it’s the right mindset and correct thinking mechanism that enables us to <mark>see through the past and glimpse the future</mark>.",
+        "about-p2": "I learn and study more so I can begin <mark>developing new frameworks</mark> for handling various data types and formats, including any variables they encompass. Ultimately, my goal is to <mark>create AI models</mark> that not only uncover hidden insights but also foresee how events might unfold—offering new directions for significant decisions that <mark>impact companies and individuals</mark>.",
+        "about-p3": "Through critical and analytical thinking, I value continuous learning and openness to constructive criticism, both of which support ongoing growth. I trust in my ability to tackle uncertainty and complex challenges with confidence, using both foundational methods and forward-thinking approaches. <mark>In my view</mark>, a successful data scientist is knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a <mark>visionary</mark>.",
+
+        // Projects
+        "projects-title": "Projects",
+        "project1-title": "Data Classification",
+        "project1-text": "This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.",
+        "project2-title": "Predictive modeling",
+        "project2-text": "This repository contains all code and documentation related to reconstructing neutrino energy from simulated data using various machine learning (ML) models and deep learning architectures. The goal is to predict neutrino energy from truth-level features and compare different ML approaches.",
+        "project3-title": "Signal Processing",
+        "project3-text": "This repository demonstrates a Singular Spectrum Analysis (SSA) approach for time series decomposition. In particular, we showcase how SSA can help separate a signal into trend, periodic components, and noise by embedding the series into a matrix, and reconstructing meaningful components.",
+
+        // Skills
+        "skills-heading": "Skills",
+        "skill1-title": "Python",
+        "skill1-text": "Python is my <mark>all-in-one tool</mark> for data science, covering everything from data manipulation <mark>(pandas, NumPy)</mark> to machine learning <mark>(scikit-learn, TensorFlow)</mark> and time series analysis <mark>(statsmodels, prophet)</mark>. It simplifies data preprocessing, visualization, and modeling, making it easy to explore insights, build predictive models, and automate workflows. Its extensive ecosystem and flexibility make it indispensable for tackling any data-driven problem efficiently.",
+        "skill2-title": "Data Visualization",
+        "skill2-text": "Data visualization is essential for <mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.",
+        "skill3-title": "Machine Learning",
+        "skill3-text": " <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy.",
+        "skill4-title": "Cloud Tech (AWS)",
+        "skill4-text": "AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.",
+
+        // Contact
+        "contact-title": "Contact Me"
+      },
+      fr: {
+        // Navbar
+        "nav-home": "Accueil",
+        "nav-about": "À propos",
+        "nav-projects": "Projets",
+        "nav-skills": "Compétences",
+        "nav-contact": "Contact",
+
+        // About
+        "about-title": "À propos",
+        "about-p1": "Je m'appelle <mark>Amine Meskar</mark>. Je suis un <mark>data scientist</mark> de niveau doctorat avec une solide expérience en statistiques, calcul et algorithmes avancés d'apprentissage profond. Je ne m'intéresse pas seulement à la résolution de problèmes en soi ; je veux naviguer dans <mark>l'incertitude et le chaos</mark> pour parvenir à des prévisions solides. Je considère les données comme un <mark>fleuve du temps</mark>, et les outils comme le bateau qui nous permet de le parcourir. Pourtant, c'est le bon état d'esprit et le mécanisme de pensée correct qui nous permettent de <mark>voir à travers le passé et d'entrevoir l'avenir</mark>.",
+        "about-p2": "J'apprends et j'étudie davantage afin de commencer à <mark>développer de nouveaux cadres</mark> pour gérer différents types et formats de données, y compris les variables qu'ils englobent. En fin de compte, mon objectif est de <mark>créer des modèles d'IA</mark> qui non seulement découvrent des informations cachées, mais prévoient également comment les événements pourraient se dérouler—offrant de nouvelles orientations pour des décisions importantes qui <mark>impactent les entreprises et les individus</mark>.",
+        "about-p3": "Grâce à une pensée critique et analytique, j'accorde de l'importance à l'apprentissage continu et à l'ouverture à la critique constructive, ce qui favorise une croissance permanente. Je crois en ma capacité à relever les incertitudes et les défis complexes avec assurance, en utilisant à la fois des méthodes fondamentales et des approches tournées vers l'avenir. <mark>Selon moi</mark>, un data scientist performant est compétent et habile, mais un véritablement excellent va plus loin—imaginant ce qui se trouve au-delà du présent pour aider à façonner l'avenir en tant que <mark>prophète</mark>.",
+
+        // Projects
+        "projects-title": "Projets",
+        "project1-title": "Classification de données",
+        "project1-text": "Ce projet traite les données simulées ANTARES, les prépare pour l'apprentissage automatique et met en œuvre divers modèles de réseaux de neurones pour des tâches de classification. Il démontre une expertise en Python, script shell, apprentissage automatique et prétraitement des données, offrant un pipeline complet allant des données brutes aux modèles entraînés.",
+        "project2-title": "Modélisation Prédictive",
+        "project2-text": "Ce dépôt contient tout le code et la documentation relatifs à la reconstruction de l'énergie des neutrinos à partir de données simulées en utilisant divers modèles d'apprentissage automatique (ML) et architectures d'apprentissage profond. L'objectif est de prédire l'énergie des neutrinos à partir de caractéristiques de niveau 'truth' et de comparer différentes approches ML.",
+        "project3-title": "Traitement du Signal",
+        "project3-text": "Ce dépôt présente une approche d'Analyse en Composantes Singulières (SSA) pour la décomposition de séries temporelles. En particulier, nous montrons comment la SSA peut aider à séparer un signal en tendance, composants périodiques et bruit en incorporant la série dans une matrice, puis en reconstruisant des composantes significatives.",
+
+        // Skills
+        "skills-heading": "Compétences",
+        "skill1-title": "Python",
+        "skill1-text": "Python est mon <mark>outil polyvalent</mark> en science des données, couvrant tout, de la manipulation de données <mark>(pandas, NumPy)</mark> à l'apprentissage automatique <mark>(scikit-learn, TensorFlow)</mark> et l'analyse de séries temporelles <mark>(statsmodels, prophet)</mark>. Il facilite le prétraitement des données, la visualisation et la modélisation, ce qui le rend idéal pour explorer des insights, créer des modèles prédictifs et automatiser des flux de travail. Son vaste écosystème et sa flexibilité en font un atout indispensable pour relever efficacement tout défi axé sur les données.",
+        "skill2-title": "Visualisation des données",
+        "skill2-text": "La visualisation des données est essentielle pour <mark>révéler des tendances et des insights dans des jeux de données complexes</mark>, permettant une meilleure prise de décision et communication. Elle aide les entreprises à <mark>optimiser</mark> leurs stratégies, à <mark>améliorer</mark> leur efficacité et à stimuler l'innovation en rendant les données plus accessibles et exploitables.",
+        "skill3-title": "Apprentissage Automatique",
+        "skill3-text": "L'<mark>apprentissage profond</mark> est un élément clé de mon parcours en data science, me permettant de <mark>concevoir des modèles puissants</mark> pour la reconnaissance de formes, la prévision de séries temporelles et la prise de décisions complexes. Avec des frameworks tels que <mark>TensorFlow et PyTorch</mark>, je développe des réseaux de neurones qui automatisent l'extraction de caractéristiques et améliorent la précision prédictive.",
+        "skill4-title": "Technologies Cloud (AWS)",
+        "skill4-text": "AWS est mon premier choix pour gérer des <mark>projets à grande échelle</mark>, offrant la <mark>flexibilité</mark> d'expérimenter différents outils et approches au sein d'un même écosystème. Qu'il s'agisse d'utiliser <mark>EC2</mark> pour un calcul extensible, <mark>S3</mark> pour un stockage efficace ou <mark>SageMaker</mark> pour l'apprentissage automatique, AWS me permet de gérer les ressources de manière transparente, d'automatiser les flux de travail et de <mark>déployer des modèles</mark> sans contraintes d'infrastructure. Son adaptabilité le rend indispensable pour relever avec efficacité et évolutivité des défis complexes en science des données.",
+
+        // Contact
+        "contact-title": "Me Contacter"
+      },
+      ar: {
+  // Navbar
+  "nav-home": "الرئيسية",
+  "nav-about": "عن",
+  "nav-projects": "المشاريع",
+  "nav-skills": "المهارات",
+  "nav-contact": "اتصل بي",
+
+  // About
+  "about-title": "عن",
+  "about-p1": "اسمي <mark>أمين مسكار</mark>. أنا <mark>عالم بيانات</mark> على مستوى الدكتوراه مع خلفية قوية في الإحصاء والتفاضل والتكامل والخوارزميات المتقدمة للتعلم العميق. لا أهتم فقط بحل المشكلات لمجرد حلها؛ بل أرغب في خوض <mark>حالة عدم اليقين والفوضى</mark> للوصول إلى توقعات دقيقة. أرى البيانات كأنها <mark>نهر الزمن</mark>، والأدوات هي القارب الذي يتيح لنا الإبحار فيه. ومع ذلك، فإن العقلية الصحيحة وآلية التفكير السليم هما ما يمكننا من <mark>رؤية الماضي واستشراف المستقبل</mark>.",
+  "about-p2": "أتعلم وأدرس أكثر حتى أبدأ في <mark>تطوير أطر جديدة</mark> للتعامل مع أنواع وصيغ مختلفة من البيانات، بما في ذلك أي متغيرات تتضمنها. وفي النهاية، هدفي هو <mark>إنشاء نماذج ذكاء اصطناعي</mark> لا تكتشف فقط الرؤى الخفية، ولكن تتنبأ أيضًا بكيفية تطور الأحداث—مقدمةً اتجاهات جديدة لقرارات مهمة تؤثر على <mark>الشركات والأفراد</mark>.",
+  "about-p3": "من خلال التفكير النقدي والتحليلي، أُولي أهمية كبيرة للتعلم المستمر والانفتاح على النقد البنّاء، وكلاهما يدعم النمو المستمر. أثق في قدرتي على التعامل مع عدم اليقين والتحديات المعقدة بثقة، مستخدمًا الأساليب الأساسية والنهج المستقبلية. <mark>من وجهة نظري</mark>، عالم البيانات الناجح يمتلك المعرفة والمهارة، ولكن المتميز حقًا يذهب إلى أبعد من ذلك—يتخيل ما وراء الحاضر للمساهمة في تشكيل المستقبل بوصفه <mark>رؤيويًا</mark>.",
+
+  // Projects
+  "projects-title": "المشاريع",
+  "project1-title": "تصنيف البيانات",
+  "project1-text": "يعالج هذا المشروع بيانات ANTARES المُحاكية ويجهزها للتعلم الآلي ويطبّق نماذج شبكات عصبية متنوعة لمهام التصنيف. إنه يُظهر خبرة في Python و shell scripting والتعلم الآلي ومعالجة البيانات، ويقدم خط عمل كامل من البيانات الأولية إلى النماذج المدربة.",
+  "project2-title": "النمذجة التنبؤية",
+  "project2-text": "يحتوي هذا المستودع على جميع التعليمات البرمجية والوثائق المتعلقة بإعادة بناء طاقة النيوترينو من البيانات المُحاكية باستخدام نماذج تعلم آلي (ML) مختلفة وهياكل تعلم عميق. الهدف هو التنبؤ بطاقة النيوترينو من ميزات مستوى 'truth' ومقارنة طرق التعلم الآلي المختلفة.",
+  "project3-title": "معالجة الإشارة",
+  "project3-text": "يوضح هذا المستودع منهجية التحليل الطيفي الأحادي (SSA) لتقسيم السلاسل الزمنية. على وجه الخصوص، نعرض كيف يمكن لـ SSA المساعدة في فصل الإشارة إلى اتجاه ومكونات دورية وضوضاء عن طريق تضمين السلسلة في مصفوفة وإعادة بناء المكونات ذات المغزى.",
+
+  // Skills
+  "skills-heading": "المهارات",
+  "skill1-title": "بايثون",
+  "skill1-text": "تُعد بايثون <mark>أداة شاملة</mark> في مجال علم البيانات، فهي تغطي كل شيء من معالجة البيانات <mark>(pandas, NumPy)</mark> إلى التعلم الآلي <mark>(scikit-learn, TensorFlow)</mark> وتحليل السلاسل الزمنية <mark>(statsmodels, prophet)</mark>. إنها تُبسِّط عمليات المعالجة المسبقة للبيانات، والعرض المرئي، والنمذجة، مما يجعل من السهل استكشاف الرؤى وبناء النماذج التنبؤية وأتمتة سير العمل. إن نظامها البيئي الواسع ومرونتها يجعلانها لا غنى عنها للتعامل مع أي مشكلة تعتمد على البيانات بكفاءة.",
+  "skill2-title": "تصور البيانات",
+  "skill2-text": "يُعد تصور البيانات ضروريًا <mark>لاكتشاف الأنماط والاتجاهات والرؤى في مجموعات البيانات المعقدة</mark>، مما يتيح اتخاذ قرارات أفضل والتواصل الفعّال. يساعد ذلك الشركات على <mark>تحسين</mark> استراتيجياتها وزيادة الكفاءة ودفع الابتكار من خلال جعل البيانات أكثر سهولة وقابلة للتنفيذ.",
+  "skill3-title": "التعلم الآلي",
+  "skill3-text": "يُعتبر <mark>التعلم العميق</mark> جزءًا أساسيًا من رحلتي في علم البيانات، حيث يسمح لي <mark>ببناء نماذج قوية</mark> للتعرف على الأنماط والتنبؤ بالسلاسل الزمنية واتخاذ القرارات المعقدة. وباستخدام أُطر مثل <mark>TensorFlow وPyTorch</mark>، أطور شبكات عصبية تعمل على أتمتة استخلاص الميزات وتعزيز الدقة التنبؤية.",
+  "skill4-title": "تقنيات السحابة (AWS)",
+  "skill4-text": "AWS هو خياري الأول للتعامل مع <mark>المشاريع واسعة النطاق</mark>، حيث يوفر <mark>المرونة</mark> لتجربة أدوات وأساليب مختلفة داخل نظام بيئي واحد. سواء كان ذلك باستخدام <mark>EC2</mark> للحوسبة القابلة للتطوير أو <mark>S3</mark> للتخزين الفعال أو <mark>SageMaker</mark> للتعلم الآلي، فإن AWS تتيح لي إدارة الموارد بسلاسة وأتمتة تدفقات العمل و<mark>نشر النماذج</mark> دون قيود البنية التحتية. تجعلها قابلية التكيف ضرورية للتعامل مع تحديات علم البيانات المعقدة بكفاءة وقابلية للتوسع.",
+
+  // Contact
+  "contact-title": "اتصل بي"
+}
+
+    };
+
+    // Switch content based on selected language
+    document.getElementById('languageSelector').addEventListener('change', function() {
+      const selectedLang = this.value;
+
+      // Navbar
+      document.getElementById('nav-home').innerHTML = translations[selectedLang]['nav-home'];
+      document.getElementById('nav-about').innerHTML = translations[selectedLang]['nav-about'];
+      document.getElementById('nav-projects').innerHTML = translations[selectedLang]['nav-projects'];
+      document.getElementById('nav-skills').innerHTML = translations[selectedLang]['nav-skills'];
+      document.getElementById('nav-contact').innerHTML = translations[selectedLang]['nav-contact'];
+
+      // About
+      document.getElementById('about-title').innerHTML = translations[selectedLang]['about-title'];
+      document.getElementById('about-p1').innerHTML = translations[selectedLang]['about-p1'];
+      document.getElementById('about-p2').innerHTML = translations[selectedLang]['about-p2'];
+      document.getElementById('about-p3').innerHTML = translations[selectedLang]['about-p3'];
+
+      // Projects
+      document.getElementById('projects-title').innerHTML = translations[selectedLang]['projects-title'];
+      document.getElementById('project1-title').innerHTML = translations[selectedLang]['project1-title'];
+      document.getElementById('project1-text').innerHTML = translations[selectedLang]['project1-text'];
+      document.getElementById('project2-title').innerHTML = translations[selectedLang]['project2-title'];
+      document.getElementById('project2-text').innerHTML = translations[selectedLang]['project2-text'];
+      document.getElementById('project3-title').innerHTML = translations[selectedLang]['project3-title'];
+      document.getElementById('project3-text').innerHTML = translations[selectedLang]['project3-text'];
+
+      // Skills
+      document.getElementById('skills-heading').innerHTML = translations[selectedLang]['skills-heading'];
+      document.getElementById('skill1-title').innerHTML = translations[selectedLang]['skill1-title'];
+      document.getElementById('skill1-text').innerHTML = translations[selectedLang]['skill1-text'];
+      document.getElementById('skill2-title').innerHTML = translations[selectedLang]['skill2-title'];
+      document.getElementById('skill2-text').innerHTML = translations[selectedLang]['skill2-text'];
+      document.getElementById('skill3-title').innerHTML = translations[selectedLang]['skill3-title'];
+      document.getElementById('skill3-text').innerHTML = translations[selectedLang]['skill3-text'];
+      document.getElementById('skill4-title').innerHTML = translations[selectedLang]['skill4-title'];
+      document.getElementById('skill4-text').innerHTML = translations[selectedLang]['skill4-text'];
+
+      // Contact
+      document.getElementById('contact-title').innerHTML = translations[selectedLang]['contact-title'];
+
+      // Update the lang attribute
+      document.documentElement.lang = selectedLang;
+      // Toggle RTL for Arabic
+      document.body.classList.toggle('rtl', selectedLang === 'ar');
     });
   </script>
 </body>
