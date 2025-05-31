@@ -244,19 +244,32 @@
     const chatToggle = document.getElementById("chat-toggle");
     const chatBox = document.getElementById("chat-box");
     const chatMessages = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
 
+    // Show/hide chat box when toggle button is clicked
     chatToggle.addEventListener("click", () => {
       chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+      if (chatBox.style.display === "block") {
+        chatInput.focus();
+      }
+    });
+
+    // Allow "Enter" key to send the message
+    chatInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
     });
 
     async function sendMessage() {
-      const input = document.getElementById("chat-input");
-      const message = input.value;
+      const message = chatInput.value.trim();
       if (!message) return;
 
       // Append user's message
       chatMessages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-      input.value = "";
+      chatInput.value = "";
+      chatInput.focus();
 
       try {
         const response = await fetch("https://chatbot-amine.onrender.com/chatbot", {
@@ -264,13 +277,23 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message }),
         });
-        const data = await response.json();
-        chatMessages.innerHTML += `<div><strong>AmineBot:</strong> ${data.reply}</div>`;
-        // Keep the scroll pinned to the bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        if (!response.ok) {
+          // If the server returns HTTP 4xx/5xx, log the status
+          console.error("Server responded with status:", response.status);
+          chatMessages.innerHTML += `<div><strong>AmineBot:</strong> Sorry, something went wrong (status ${response.status}).</div>`;
+        } else {
+          const data = await response.json();
+          chatMessages.innerHTML += `<div><strong>AmineBot:</strong> ${data.reply}</div>`;
+        }
       } catch (err) {
+        // Network error or CORS issue
+        console.error("Fetch error:", err);
         chatMessages.innerHTML += `<div><strong>AmineBot:</strong> Sorry, something went wrong.</div>`;
       }
+
+      // Scroll to bottom
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   </script>
 
@@ -615,7 +638,7 @@
         "about-title": "À propos",
         "about-p1": "Je m'appelle <mark>Amine Meskar</mark>. Je suis un <mark>data scientist</mark> de niveau doctorat avec une solide expérience en statistiques, calcul et algorithmes avancés d'apprentissage profond. Je ne m'intéresse pas seulement à la résolution de problèmes en soi ; je veux naviguer dans <mark>l'incertitude et le chaos</mark> pour parvenir à des prévisions solides. Je considère les données comme un <mark>fleuve du temps</mark>, et les outils comme le bateau qui nous permet de le parcourir. Pourtant, c'est le bon état d'esprit et le mécanisme de pensée correct qui nous permettent de <mark>voir à travers le passé et d'entrevoir l'avenir</mark>.",
         "about-p2": "J'apprends et j'étudie davantage afin de commencer à <mark>développer de nouveaux cadres</mark> pour gérer différents types et formats de données, y compris les variables qu'ils englobent. En fin de compte, mon objectif est de <mark>créer des modèles d'IA</mark> qui non seulement découvrent des informations cachées, mais prévoient également comment les événements pourraient se dérouler—offrant de nouvelles orientations pour des décisions importantes qui <mark>impactent les entreprises et les individus</mark>.",
-        "about-p3": "Grâce à une pensée critique et analytique, j'accorde de l'importance à l'apprentissage continu et à l'ouverture à la critique constructive, ce qui favorise une croissance permanente. Je crois en ma capacité à relever les incertitudes et les défis complexes avec assurance, en utilisant à la fois des méthodes fondamentales et des approches tournées vers l'avenir. <mark>Selon moi</mark>, un data scientist performant est compétent et habile, mais un véritablement excellent va plus loin—imaginant ce qui se trouve au-delà du présent pour aider à façonner l'avenir en tant que <mark>prophète</mark>.",
+        "about-p3": "Grâce à une pensée critique et analytique, j'accorde de l'importance à l'apprentissage continu et à l'ouverture à la critique constructive, ce qui favorise une croissance permanente. Je crois en ma capacité à relever les incertitudes et les défis complexes avec assurance, en utilisant à la fois des méthodes fondamentales et des approches tournées vers l'avenir. <mark>Selon moi</mark>, un data scientist performant est compétent et habile, mais un véritablelement excellent va plus loin—imaginant ce qui se trouve au-delà du présent pour aider à façonner l'avenir en tant que <mark>prophète</mark>.",
 
         // Projects
         "projects-title": "Projets",
@@ -633,7 +656,7 @@
         "skill2-title": "Visualisation des données",
         "skill2-text": "La visualisation des données est essentielle pour <mark>révéler des tendances et des insights dans des jeux de données complexes</mark>, permettant une meilleure prise de décision et communication. Elle aide les entreprises à <mark>optimiser</mark> leurs stratégies, à <mark>améliorer</mark> leur efficacité et à stimuler l'innovation en rendant les données plus accessibles et exploitables.",
         "skill3-title": "Apprentissage Automatique",
-        "skill3-text": "L'<mark>apprentissage profond</mark> est un élément clé de mon parcours en data science, me permettant de <mark>concevoir des modèles puissants</mark> pour la reconnaissance de formes, la prévision de séries temporelles et la prise de décisions complexes. Avec des frameworks tels que <mark>TensorFlow et PyTorch</mark>, je développe des réseaux de neurones qui automatisent l'extraction de caractéristiques et améliorent la précision prédictive.",
+        "skill3-text": "L'<mark>apprentissage profond</mark> est un élément clé de mon parcours en data science, me permettant de <mark>concevoir des modèles puissants</mark> pour la reconnaissance de formes, la prévision de séries temporelles et la prise de décisions complexes. Avec des frameworks tels que <mark>TensorFlow et PyTorch</mark>, je développe des réseaux neurales qui automatisent l'extraction de caractéristiques et améliorent la précision prédictive.",
         "skill4-title": "Technologies Cloud (AWS)",
         "skill4-text": "AWS est mon premier choix pour gérer des <mark>projets à grande échelle</mark>, offrant la <mark>flexibilité</mark> d'expérimenter différents outils et approches au sein d'un même écosystème. Qu'il s'agisse d'utiliser <mark>EC2</mark> pour un calcul extensible, <mark>S3</mark> pour un stockage efficace ou <mark>SageMaker</mark> pour l'apprentissage automatique, AWS me permet de gérer les ressources de manière transparente, d'automatiser les flux de travail et de <mark>déployer des modèles</mark> sans contraintes d'infrastructure. Son adaptabilité le rend indispensable pour relever avec efficacité et évolutivité des défis complexes en science des données.",
 
@@ -672,7 +695,7 @@
         "skill3-title": "التعلم الآلي",
         "skill3-text": "يُعتبر <mark>التعلم العميق</mark> جزءًا أساسيًا من رحلتي في علم البيانات، حيث يسمح لي <mark>ببناء نماذج قوية</mark> للتعرف على الأنماط والتنبؤ بالسلاسل الزمنية واتخاذ القرارات المعقدة. وباستخدام أُطر مثل <mark>TensorFlow وPyTorch</mark>، أطور شبكات عصبية تعمل على أتمتة استخلاص الميزات وتعزيز الدقة التنبؤية.",
         "skill4-title": "تقنيات السحابة (AWS)",
-        "skill4-text": "AWS هو خياري الأول للتعامل مع <mark>المشاريع واسعة النطاق</mark>، حيث يوفر <mark>المرونة</mark> لتجربة أدوات وأساليب مختلفة داخل نظام بيئي واحد. سواء كان ذلك باستخدام <mark>EC2</mark> للحوسبة القابلة للتطوير أو <mark>S3</mark> للتخزين الفعال أو <mark>SageMaker</mark> للتعلم الآلي، فإن AWS تتيح لي إدارة الموارد بسلاسة وأتمتة تدفقات العمل و<mark>نشر النماذج</mark> دون قيود البنية التحتية. تجعلها قابلية التكيف ضرورية للتعامل مع تحديات علم البيانات المعقدة بكفاءة وقابلية للتوسع.",
+        "skill4-text": "AWS هو خياري الأول للتعامل مع <mark>المشاريع واسعة النطاق</mark>، حيث يوفر <mark>المرونة</mark> لتجربة أدوات وأساليب مختلفة داخل نظام بيئي واحد. سواء كان ذلك باستخدام <mark>EC2</mark> للحوسبة القابلة للتطوير أو <mark>S3</mark> للتخزين فعال أو <mark>SageMaker</mark> للتعلم الآلي، فإن AWS تتيح لي إدارة الموارد بسلاسة وأتمتة تدفقات العمل و<mark>نشر النماذج</mark> دون قيود البنية التحتية. تجعلها قابلية التكيف ضرورية للتعامل مع تحديات علم البيانات المعقدة بكفاءة وقابلية للتوسع.",
 
         // Contact
         "contact-title": "اتصل بي",
