@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio - Black &amp; White</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+
   <style>
     /* Global Styles */
     body {
@@ -50,7 +54,7 @@
 
     /* Navbar (remains dark with white links) */
     .navbar {
-      box-shadow: 0 2px 5px rgba(0,0,0,0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
     }
     .navbar-nav .nav-link {
       color: white;
@@ -65,7 +69,9 @@
     }
 
     /* Section Styles: White background with black text for most sections */
-    .about-section, .projects-section, .skills-section {
+    .about-section,
+    .projects-section,
+    .skills-section {
       background-color: white;
       color: rgb(0, 0, 0);
     }
@@ -102,7 +108,7 @@
       text-align: center;
     }
     .projects-section .card {
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .projects-section .card-img-top {
       max-height: 180px;
@@ -129,7 +135,7 @@
       text-align: center;
     }
     .skills-section .card {
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .skills-section .card-img-top {
       padding: 20px;
@@ -175,117 +181,98 @@
       color: #ddd;
     }
 
+    /* Chat Widget Styles */
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-family: sans-serif;
+      z-index: 9999;
+    }
+    #chat-toggle {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    #chat-box {
+      width: 300px;
+      height: 400px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow-y: auto;
+      padding: 10px;
+      margin-top: 10px;
+      display: none; /* Hidden by default */
+    }
+    #chat-box input {
+      width: 70%;
+      padding: 6px;
+      margin-top: 5px;
+    }
+    #chat-box button {
+      padding: 6px 8px;
+      margin-left: 4px;
+    }
+    #chat-messages {
+      height: 85%;
+      overflow-y: auto;
+      margin-bottom: 5px;
+    }
   </style>
-
-<style>
-  #chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-family: sans-serif;
-    z-index: 9999;
-  }
-
-  #chat-toggle {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 50px;
-    cursor: pointer;
-  }
-
-  #chat-box {
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow-y: auto;
-    padding: 10px;
-    margin-top: 10px;
-  }
-
-  #chat-box input {
-    width: 70%;
-    padding: 6px;
-    margin-top: 5px;
-  }
-
-  #chat-box button {
-    padding: 6px 8px;
-    margin-left: 4px;
-  }
-
-  #chat-messages {
-    height: 85%;
-    overflow-y: auto;
-    margin-bottom: 5px;
-  }
-</style>
-
 </head>
 
-<!-- Chatbot Button + UI -->
-<div id="chatbot-container">
-  <button id="chat-toggle">💬 Chat with AmineBot</button>
-  <div id="chat-box" style="display:none;">
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Ask me anything about Amine..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
-
-<script>
-  const chatToggle = document.getElementById("chat-toggle");
-  const chatBox = document.getElementById("chat-box");
-  const chatMessages = document.getElementById("chat-messages");
-
-  chatToggle.addEventListener("click", () => {
-    chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
-  });
-
-  async function sendMessage() {
-    const input = document.getElementById("chat-input");
-    const message = input.value;
-    if (!message) return;
-
-    chatMessages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-    input.value = "";
-
-    const response = await fetch("https://chatbot-amine.onrender.com/chatbot", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await response.json();
-    chatMessages.innerHTML += `<div><strong>AmineBot:</strong> ${data.reply}</div>`;
-  }
-</script>
-
-<script>
-  async function sendMessage() {
-    const input = document.getElementById("user-input");
-    const output = document.getElementById("chat-output");
-    const message = input.value;
-
-    const res = await fetch("https://<your-render-url>.onrender.com/chatbot", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message }),
-    });
-
-    const data = await res.json();
-    const reply = document.createElement("div");
-    reply.textContent = "🤖 " + data.reply;
-    output.appendChild(reply);
-    input.value = "";
-  }
-</script>
-
-
 <body>
+  <!-- Chatbot Button + UI -->
+  <div id="chatbot-container">
+    <button id="chat-toggle">💬 Chat with AmineBot</button>
+    <div id="chat-box">
+      <div id="chat-messages"></div>
+      <input
+        type="text"
+        id="chat-input"
+        placeholder="Ask me anything about Amine..."
+      />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatBox = document.getElementById("chat-box");
+    const chatMessages = document.getElementById("chat-messages");
+
+    chatToggle.addEventListener("click", () => {
+      chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+    });
+
+    async function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const message = input.value;
+      if (!message) return;
+
+      // Append user's message
+      chatMessages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+      input.value = "";
+
+      try {
+        const response = await fetch("https://chatbot-amine.onrender.com/chatbot", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+        const data = await response.json();
+        chatMessages.innerHTML += `<div><strong>AmineBot:</strong> ${data.reply}</div>`;
+        // Keep the scroll pinned to the bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } catch (err) {
+        chatMessages.innerHTML += `<div><strong>AmineBot:</strong> Sorry, something went wrong.</div>`;
+      }
+    }
+  </script>
 
   <!-- Language Selector -->
   <div class="container text-right mt-3">
@@ -300,8 +287,15 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#home" id="nav-home">Home</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -327,10 +321,35 @@
   <section id="about" class="about-section">
     <div class="container">
       <h2 id="about-title">About</h2>
-      <img src="images/about/animated_icon.jpeg" alt="About Me">
-      <p id="about-p1">My name is <mark>Amine Meskar</mark>. I am a Ph.D-level <mark>data scientist</mark> with a strong background in statistics, calculus, and advanced deep learning algorithms. I’m not just interested in problem-solving for its own sake; I want to navigate <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data as a <mark>river of time</mark>, and tools as the boat that lets us travel through it. Yet, it’s the right mindset and correct thinking mechanism that enables us to <mark>see through the past and glimpse the future</mark>.</p>
-      <p id="about-p2">I learn and study more so I can begin <mark>developing new frameworks</mark> for handling various data types and formats, including any variables they encompass. Ultimately, my goal is to <mark>create AI models</mark> that not only uncover hidden insights but also foresee how events might unfold—offering new directions for significant decisions that <mark>impact companies and individuals</mark>.</p>
-      <p id="about-p3">Through critical and analytical thinking, I value continuous learning and openness to constructive criticism, both of which support ongoing growth. I trust in my ability to tackle uncertainty and complex challenges with confidence, using both foundational methods and forward-thinking approaches. <mark>In my view</mark>, a successful data scientist is knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a <mark>visionary</mark>.</p>
+      <img src="images/about/animated_icon.jpeg" alt="About Me" />
+      <p id="about-p1">
+        My name is <mark>Amine Meskar</mark>. I am a Ph.D-level
+        <mark>data scientist</mark> with a strong background in statistics,
+        calculus, and advanced deep learning algorithms. I’m not just interested
+        in problem-solving for its own sake; I want to navigate
+        <mark>uncertainty and chaos</mark> to reach solid forecasts. I see data
+        as a <mark>river of time</mark>, and tools as the boat that lets us
+        travel through it. Yet, it’s the right mindset and correct thinking
+        mechanism that enables us to <mark>see through the past and glimpse the
+          future</mark>.
+      </p>
+      <p id="about-p2">
+        I learn and study more so I can begin <mark>developing new frameworks</mark>
+        for handling various data types and formats, including any variables they
+        encompass. Ultimately, my goal is to <mark>create AI models</mark> that
+        not only uncover hidden insights but also foresee how events might
+        unfold—offering new directions for significant decisions that
+        <mark>impact companies and individuals</mark>.
+      </p>
+      <p id="about-p3">
+        Through critical and analytical thinking, I value continuous learning and
+        openness to constructive criticism, both of which support ongoing growth.
+        I trust in my ability to tackle uncertainty and complex challenges with
+        confidence, using both foundational methods and forward-thinking
+        approaches. <mark>In my view</mark>, a successful data scientist is
+        knowledgeable and skilled, but a truly great one goes a step further—envisioning what lies beyond the present to help shape the future as a
+        <mark>visionary</mark>.
+      </p>
     </div>
   </section>
 
@@ -342,36 +361,78 @@
         <!-- Project 1 -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/projects/1.jpg" class="card-img-top" alt="Project 1">
+            <img src="images/projects/1.jpg" class="card-img-top" alt="Project 1"/>
             <div class="card-body">
               <h5 class="card-title" id="project1-title">Data Classification</h5>
-              <p class="card-text" id="project1-text">This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.</p>
-              <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-primary">Readme</a>
-              <a href="https://github.com/AMeskar/DeepLearning" class="btn btn-secondary">Source Code</a>
+              <p class="card-text" id="project1-text">
+                This project processes simulated ANTARES data, prepares it for
+                machine learning, and implements various neural network models for
+                classification tasks. It demonstrates expertise in Python, shell
+                scripting, machine learning, and data preprocessing and provides a
+                complete pipeline from raw data to trained models.
+              </p>
+              <a
+                href="https://github.com/AMeskar/DeepLearning"
+                class="btn btn-primary"
+                >Readme</a
+              >
+              <a
+                href="https://github.com/AMeskar/DeepLearning"
+                class="btn btn-secondary"
+                >Source Code</a
+              >
             </div>
           </div>
         </div>
         <!-- Project 2 -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/projects/3.png" class="card-img-top" alt="Project 2">
+            <img src="images/projects/3.png" class="card-img-top" alt="Project 2"/>
             <div class="card-body">
               <h5 class="card-title" id="project2-title">Predictive modeling</h5>
-              <p class="card-text" id="project2-text">This repository contains all code and documentation related to reconstructing neutrino energy from simulated data using various machine learning (ML) models and deep learning architectures. The goal is to predict neutrino energy from truth-level features and compare different ML approaches.</p>
-              <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-primary">Readme</a>
-              <a href="https://github.com/AMeskar/Reconstruction" class="btn btn-secondary">Source Code</a>
+              <p class="card-text" id="project2-text">
+                This repository contains all code and documentation related to
+                reconstructing neutrino energy from simulated data using various
+                machine learning (ML) models and deep learning architectures. The
+                goal is to predict neutrino energy from truth-level features and
+                compare different ML approaches.
+              </p>
+              <a
+                href="https://github.com/AMeskar/Reconstruction"
+                class="btn btn-primary"
+                >Readme</a
+              >
+              <a
+                href="https://github.com/AMeskar/Reconstruction"
+                class="btn btn-secondary"
+                >Source Code</a
+              >
             </div>
           </div>
         </div>
         <!-- Project 3 -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/projects/2.jpg" class="card-img-top" alt="Project 3">
+            <img src="images/projects/2.jpg" class="card-img-top" alt="Project 3"/>
             <div class="card-body">
               <h5 class="card-title" id="project3-title">Signal Processing</h5>
-              <p class="card-text" id="project3-text">This repository demonstrates a Singular Spectrum Analysis (SSA) approach for time series decomposition. In particular, we showcase how SSA can help separate a signal into trend, periodic components, and noise by embedding the series into a matrix, and reconstructing meaningful components.</p>
-              <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-primary">Readme</a>
-              <a href="https://github.com/AMeskar/Signal-Processing" class="btn btn-secondary">Source Code</a>
+              <p class="card-text" id="project3-text">
+                This repository demonstrates a Singular Spectrum Analysis (SSA)
+                approach for time series decomposition. In particular, we showcase
+                how SSA can help separate a signal into trend, periodic components,
+                and noise by embedding the series into a matrix, and reconstructing
+                meaningful components.
+              </p>
+              <a
+                href="https://github.com/AMeskar/Signal-Processing"
+                class="btn btn-primary"
+                >Readme</a
+              >
+              <a
+                href="https://github.com/AMeskar/Signal-Processing"
+                class="btn btn-secondary"
+                >Source Code</a
+              >
             </div>
           </div>
         </div>
@@ -387,40 +448,85 @@
         <!-- Skill 1 -->
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img src="images/skills/1.png" class="card-img-top" alt="Python">
+            <img
+              src="images/skills/1.png"
+              class="card-img-top"
+              alt="Python"
+            />
             <div class="card-body">
               <h5 class="card-title" id="skill1-title">Python</h5>
-              <p class="card-text" id="skill1-text">Python is my <mark>all-in-one tool</mark> for data science, covering everything from data manipulation <mark>(pandas, NumPy)</mark> to machine learning <mark>(scikit-learn, TensorFlow)</mark> and time series analysis <mark>(statsmodels, prophet)</mark>. It simplifies data preprocessing, visualization, and modeling, making it easy to explore insights, build predictive models, and automate workflows. Its extensive ecosystem and flexibility make it indispensable for tackling any data-driven problem efficiently.</p>
+              <p class="card-text" id="skill1-text">
+                Python is my <mark>all-in-one tool</mark> for data science, covering
+                everything from data manipulation <mark>(pandas, NumPy)</mark> to
+                machine learning <mark>(scikit-learn, TensorFlow)</mark> and time
+                series analysis <mark>(statsmodels, prophet)</mark>. It simplifies
+                data preprocessing, visualization, and modeling, making it easy to
+                explore insights, build predictive models, and automate workflows.
+                Its extensive ecosystem and flexibility make it indispensable for
+                tackling any data-driven problem efficiently.
+              </p>
             </div>
           </div>
         </div>
         <!-- Skill 2 -->
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img src="images/skills/2.png" class="card-img-top" alt="Data Visualization">
+            <img
+              src="images/skills/2.png"
+              class="card-img-top"
+              alt="Data Visualization"
+            />
             <div class="card-body">
               <h5 class="card-title" id="skill2-title">Data Visualization</h5>
-              <p class="card-text" id="skill2-text">Data visualization is essential for <mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.</p>
+              <p class="card-text" id="skill2-text">
+                Data visualization is essential for
+                <mark>uncovering patterns, trends, and insights in complex
+                  datasets</mark>, enabling better decision-making and communication.
+                It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark>
+                efficiency, and drive innovation by making data more accessible and
+                actionable.
+              </p>
             </div>
           </div>
         </div>
         <!-- Skill 3 -->
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img src="images/skills/3.jpg" class="card-img-top" alt="SQL">
+            <img src="images/skills/3.jpg" class="card-img-top" alt="SQL" />
             <div class="card-body">
               <h5 class="card-title" id="skill3-title">Machine Learning</h5>
-              <p class="card-text" id="skill3-text"> <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy.</p>
+              <p class="card-text" id="skill3-text">
+                <mark>Deep learning</mark> is a key part of my data science journey,
+                allowing me to <mark>build powerful models</mark> for pattern
+                recognition, time series forecasting, and complex decision-making.
+                With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop
+                neural networks that automate feature extraction and enhance
+                predictive accuracy.
+              </p>
             </div>
           </div>
         </div>
         <!-- Skill 4 -->
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
-            <img src="images/skills/5.png" class="card-img-top" alt="Data Storytelling">
+            <img
+              src="images/skills/5.png"
+              class="card-img-top"
+              alt="Data Storytelling"
+            />
             <div class="card-body">
               <h5 class="card-title" id="skill4-title">Cloud Tech (AWS)</h5>
-              <p class="card-text" id="skill4-text">AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.</p>
+              <p class="card-text" id="skill4-text">
+                AWS is my first option for handling <mark>large-scale projects</mark>,
+                providing the <mark>flexibility</mark> to experiment with different
+                tools and approaches within a single ecosystem. Whether it's using
+                <mark>EC2</mark> for scalable computing, <mark>S3</mark> for
+                efficient storage, or <mark>SageMaker</mark> for machine learning,
+                AWS allows me to seamlessly manage resources, automate workflows, and
+                <mark>deploy models</mark> without infrastructure constraints. Its
+                adaptability makes it indispensable for tackling complex data science
+                challenges with efficiency and scalability.
+              </p>
             </div>
           </div>
         </div>
@@ -438,13 +544,13 @@
         </div>
         <div class="col-lg-2 col-md-4 mb-4">
           <a href="https://linkedin.com/in/amine-meskar" target="_blank">
-            <img src="icons/linkedin.png" alt="LinkedIn" class="social-icon">
+            <img src="icons/linkedin.png" alt="LinkedIn" class="social-icon"/>
             LinkedIn
           </a>
         </div>
         <div class="col-lg-2 col-md-4 mb-4">
           <a href="https://github.com/AMeskar" target="_blank">
-            <img src="icons/github.png" alt="GitHub" class="social-icon">
+            <img src="icons/github.png" alt="GitHub" class="social-icon"/>
             GitHub
           </a>
         </div>
@@ -452,75 +558,10 @@
     </div>
   </section>
 
-  <!-- Chatbot Floating Button (opens the Chatbot modal) -->
-  <button id="openChat" class="btn btn-dark" data-toggle="modal" data-target="#chatModal" style="position: fixed; bottom: 20px; right: 20px;">Chat</button>
-
-  <!-- Chatbot Modal -->
-  <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="chatModalLabel">Chatbot</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <!-- Chat conversation will appear in this scrollable area -->
-        <div class="modal-body" id="chatBody" style="max-height:300px; overflow-y:auto;">
-          <!-- Chat messages will be dynamically added here -->
-        </div>
-        <div class="modal-footer">
-          <input type="text" id="chatInput" class="form-control" placeholder="Type your message...">
-          <button type="button" id="sendChat" class="btn btn-primary">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- JavaScript Libraries -->
-  <!-- Use the full version of jQuery (not slim) for AJAX support -->
+  <!-- jQuery, Popper.js, and Bootstrap JS (for navbar toggling) -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- Chatbot JavaScript: This code sends the user message to your Python backend at "/chatbot" -->
-  <script>
-    $(document).ready(function(){
-      // When the Send button is clicked
-      $("#sendChat").click(function(){
-        var userMessage = $("#chatInput").val();
-        if(userMessage.trim() === "") return;
-
-        // Append the user's message to the chat window
-        $("#chatBody").append('<div class="text-right mb-2"><span class="badge badge-secondary">You: ' + userMessage + '</span></div>');
-        $("#chatInput").val('');
-
-        // Send the user's message to the Python backend (you must implement this endpoint)
-        $.ajax({
-          url: "/chatbot", // Ensure your Python backend listens at this URL
-          type: "POST",
-          data: JSON.stringify({ message: userMessage }),
-          contentType: "application/json",
-          success: function(response){
-            // Expecting a JSON response with a property "reply"
-            $("#chatBody").append('<div class="text-left mb-2"><span class="badge badge-primary">Bot: ' + response.reply + '</span></div>');
-            $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight);
-          },
-          error: function(){
-            $("#chatBody").append('<div class="text-left mb-2"><span class="badge badge-danger">Bot: Sorry, something went wrong.</span></div>');
-          }
-        });
-      });
-
-      // Allow sending a message by pressing the Enter key
-      $("#chatInput").keypress(function(e){
-        if(e.which == 13){
-          $("#sendChat").click();
-          return false; // Prevent form submission
-        }
-      });
-    });
-  </script>
 
   <!-- JavaScript for Language Switching -->
   <script>
@@ -555,12 +596,12 @@
         "skill2-title": "Data Visualization",
         "skill2-text": "Data visualization is essential for <mark>uncovering patterns, trends, and insights in complex datasets</mark>, enabling better decision-making and communication. It helps businesses <mark>optimize</mark> strategies, <mark>improve</mark> efficiency, and drive innovation by making data more accessible and actionable.",
         "skill3-title": "Machine Learning",
-        "skill3-text": " <mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy.",
+        "skill3-text": "<mark>Deep learning</mark> is a key part of my data science journey, allowing me to <mark>build powerful models</mark> for pattern recognition, time series forecasting, and complex decision-making. With frameworks like <mark>TensorFlow and PyTorch</mark>, I develop neural networks that automate feature extraction and enhance predictive accuracy.",
         "skill4-title": "Cloud Tech (AWS)",
         "skill4-text": "AWS is my first option for handling <mark>large-scale projects</mark>, providing the <mark>flexibility</mark> to experiment with different tools and approaches within a single ecosystem. Whether it's using <mark>EC2</mark> for scalable computing, <mark>S3</mark> for efficient storage, or <mark>SageMaker</mark> for machine learning, AWS allows me to seamlessly manage resources, automate workflows, and <mark>deploy models</mark> without infrastructure constraints. Its adaptability makes it indispensable for tackling complex data science challenges with efficiency and scalability.",
 
         // Contact
-        "contact-title": "Contact Me"
+        "contact-title": "Contact Me",
       },
       fr: {
         // Navbar
@@ -597,98 +638,119 @@
         "skill4-text": "AWS est mon premier choix pour gérer des <mark>projets à grande échelle</mark>, offrant la <mark>flexibilité</mark> d'expérimenter différents outils et approches au sein d'un même écosystème. Qu'il s'agisse d'utiliser <mark>EC2</mark> pour un calcul extensible, <mark>S3</mark> pour un stockage efficace ou <mark>SageMaker</mark> pour l'apprentissage automatique, AWS me permet de gérer les ressources de manière transparente, d'automatiser les flux de travail et de <mark>déployer des modèles</mark> sans contraintes d'infrastructure. Son adaptabilité le rend indispensable pour relever avec efficacité et évolutivité des défis complexes en science des données.",
 
         // Contact
-        "contact-title": "Me Contacter"
+        "contact-title": "Me Contacter",
       },
       ar: {
-  // Navbar
-  "nav-home": "الرئيسية",
-  "nav-about": "عن",
-  "nav-projects": "المشاريع",
-  "nav-skills": "المهارات",
-  "nav-contact": "اتصل بي",
+        // Navbar
+        "nav-home": "الرئيسية",
+        "nav-about": "عن",
+        "nav-projects": "المشاريع",
+        "nav-skills": "المهارات",
+        "nav-contact": "اتصل بي",
 
-  // About
-  "about-title": "عن",
-  "about-p1": "اسمي <mark>أمين مسكار</mark>. أنا <mark>عالم بيانات</mark> على مستوى الدكتوراه مع خلفية قوية في الإحصاء والتفاضل والتكامل والخوارزميات المتقدمة للتعلم العميق. لا أهتم فقط بحل المشكلات لمجرد حلها؛ بل أرغب في خوض <mark>حالة عدم اليقين والفوضى</mark> للوصول إلى توقعات دقيقة. أرى البيانات كأنها <mark>نهر الزمن</mark>، والأدوات هي القارب الذي يتيح لنا الإبحار فيه. ومع ذلك، فإن العقلية الصحيحة وآلية التفكير السليم هما ما يمكننا من <mark>رؤية الماضي واستشراف المستقبل</mark>.",
-  "about-p2": "أتعلم وأدرس أكثر حتى أبدأ في <mark>تطوير أطر جديدة</mark> للتعامل مع أنواع وصيغ مختلفة من البيانات، بما في ذلك أي متغيرات تتضمنها. وفي النهاية، هدفي هو <mark>إنشاء نماذج ذكاء اصطناعي</mark> لا تكتشف فقط الرؤى الخفية، ولكن تتنبأ أيضًا بكيفية تطور الأحداث—مقدمةً اتجاهات جديدة لقرارات مهمة تؤثر على <mark>الشركات والأفراد</mark>.",
-  "about-p3": "من خلال التفكير النقدي والتحليلي، أُولي أهمية كبيرة للتعلم المستمر والانفتاح على النقد البنّاء، وكلاهما يدعم النمو المستمر. أثق في قدرتي على التعامل مع عدم اليقين والتحديات المعقدة بثقة، مستخدمًا الأساليب الأساسية والنهج المستقبلية. <mark>من وجهة نظري</mark>، عالم البيانات الناجح يمتلك المعرفة والمهارة، ولكن المتميز حقًا يذهب إلى أبعد من ذلك—يتخيل ما وراء الحاضر للمساهمة في تشكيل المستقبل بوصفه <mark>رؤيويًا</mark>.",
+        // About
+        "about-title": "عن",
+        "about-p1": "اسمي <mark>أمين مسكار</mark>. أنا <mark>عالم بيانات</mark> على مستوى الدكتوراه مع خلفية قوية في الإحصاء والتفاضل والتكامل والخوارزميات المتقدمة للتعلم العميق. لا أهتم فقط بحل المشكلات لمجرد حلها؛ بل أرغب في خوض <mark>حالة عدم اليقين والفوضى</mark> للوصول إلى توقعات دقيقة. أرى البيانات كأنها <mark>نهر الزمن</mark>، والأدوات هي القارب الذي يتيح لنا الإبحار فيه. ومع ذلك، فإن العقلية الصحيحة وآلية التفكير السليم هما ما يمكننا من <mark>رؤية الماضي واستشراف المستقبل</mark>.",
+        "about-p2": "أتعلم وأدرس أكثر حتى أبدأ في <mark>تطوير أطر جديدة</mark> للتعامل مع أنواع وصيغ مختلفة من البيانات، بما في ذلك أي متغيرات تتضمنها. وفي النهاية، هدفي هو <mark>إنشاء نماذج ذكاء اصطناعي</mark> لا تكتشف فقط الرؤى الخفية، ولكن تتنبأ أيضًا بكيفية تطور الأحداث—مقدمةً اتجاهات جديدة لقرارات مهمة تؤثر على <mark>الشركات والأفراد</mark>.",
+        "about-p3": "من خلال التفكير النقدي والتحليلي، أُولي أهمية كبيرة للتعلم المستمر والانفتاح على النقد البنّاء، وكلاهما يدعم النمو المستمر. أثق في قدرتي على التعامل مع عدم اليقين والتحديات المعقدة بثقة، مستخدمًا الأساليب الأساسية والنهج المستقبلية. <mark>من وجهة نظري</mark>، عالم البيانات الناجح يمتلك المعرفة والمهارة، ولكن المتميز حقًا يذهب إلى أبعد من ذلك—يتخيل ما وراء الحاضر للمساهمة في تشكيل المستقبل بوصفه <mark>رؤيويًا</mark>.",
 
-  // Projects
-  "projects-title": "المشاريع",
-  "project1-title": "تصنيف البيانات",
-  "project1-text": "يعالج هذا المشروع بيانات ANTARES المُحاكية ويجهزها للتعلم الآلي ويطبّق نماذج شبكات عصبية متنوعة لمهام التصنيف. إنه يُظهر خبرة في Python و shell scripting والتعلم الآلي ومعالجة البيانات، ويقدم خط عمل كامل من البيانات الأولية إلى النماذج المدربة.",
-  "project2-title": "النمذجة التنبؤية",
-  "project2-text": "يحتوي هذا المستودع على جميع التعليمات البرمجية والوثائق المتعلقة بإعادة بناء طاقة النيوترينو من البيانات المُحاكية باستخدام نماذج تعلم آلي (ML) مختلفة وهياكل تعلم عميق. الهدف هو التنبؤ بطاقة النيوترينو من ميزات مستوى 'truth' ومقارنة طرق التعلم الآلي المختلفة.",
-  "project3-title": "معالجة الإشارة",
-  "project3-text": "يوضح هذا المستودع منهجية التحليل الطيفي الأحادي (SSA) لتقسيم السلاسل الزمنية. على وجه الخصوص، نعرض كيف يمكن لـ SSA المساعدة في فصل الإشارة إلى اتجاه ومكونات دورية وضوضاء عن طريق تضمين السلسلة في مصفوفة وإعادة بناء المكونات ذات المغزى.",
+        // Projects
+        "projects-title": "المشاريع",
+        "project1-title": "تصنيف البيانات",
+        "project1-text": "يعالج هذا المشروع بيانات ANTARES المُحاكية ويجهزها للتعلم الآلي ويطبّق نماذج شبكات عصبية متنوعة لمهام التصنيف. إنه يُظهر خبرة في Python و shell scripting والتعلم الآلي ومعالجة البيانات، ويقدم خط عمل كامل من البيانات الأولية إلى النماذج المدربة.",
+        "project2-title": "النمذجة التنبؤية",
+        "project2-text": "يحتوي هذا المستودع على جميع التعليمات البرمجية والوثائق المتعلقة بإعادة بناء طاقة النيوترينو من البيانات المُحاكية باستخدام نماذج تعلم آلي (ML) مختلفة وهياكل تعلم عميق. الهدف هو التنبؤ بطاقة النيوترينو من ميزات مستوى 'truth' ومقارنة طرق التعلم الآلي المختلفة.",
+        "project3-title": "معالجة الإشارة",
+        "project3-text": "يوضح هذا المستودع منهجية التحليل الطيفي الأحادي (SSA) لتقسيم السلاسل الزمنية. على وجه الخصوص، نعرض كيف يمكن لـ SSA المساعدة في فصل الإشارة إلى اتجاه ومكونات دورية وضوضاء عن طريق تضمين السلسلة في مصفوفة وإعادة بناء المكونات ذات المغزى.",
 
-  // Skills
-  "skills-heading": "المهارات",
-  "skill1-title": "بايثون",
-  "skill1-text": "تُعد بايثون <mark>أداة شاملة</mark> في مجال علم البيانات، فهي تغطي كل شيء من معالجة البيانات <mark>(pandas, NumPy)</mark> إلى التعلم الآلي <mark>(scikit-learn, TensorFlow)</mark> وتحليل السلاسل الزمنية <mark>(statsmodels, prophet)</mark>. إنها تُبسِّط عمليات المعالجة المسبقة للبيانات، والعرض المرئي، والنمذجة، مما يجعل من السهل استكشاف الرؤى وبناء النماذج التنبؤية وأتمتة سير العمل. إن نظامها البيئي الواسع ومرونتها يجعلانها لا غنى عنها للتعامل مع أي مشكلة تعتمد على البيانات بكفاءة.",
-  "skill2-title": "تصور البيانات",
-  "skill2-text": "يُعد تصور البيانات ضروريًا <mark>لاكتشاف الأنماط والاتجاهات والرؤى في مجموعات البيانات المعقدة</mark>، مما يتيح اتخاذ قرارات أفضل والتواصل الفعّال. يساعد ذلك الشركات على <mark>تحسين</mark> استراتيجياتها وزيادة الكفاءة ودفع الابتكار من خلال جعل البيانات أكثر سهولة وقابلة للتنفيذ.",
-  "skill3-title": "التعلم الآلي",
-  "skill3-text": "يُعتبر <mark>التعلم العميق</mark> جزءًا أساسيًا من رحلتي في علم البيانات، حيث يسمح لي <mark>ببناء نماذج قوية</mark> للتعرف على الأنماط والتنبؤ بالسلاسل الزمنية واتخاذ القرارات المعقدة. وباستخدام أُطر مثل <mark>TensorFlow وPyTorch</mark>، أطور شبكات عصبية تعمل على أتمتة استخلاص الميزات وتعزيز الدقة التنبؤية.",
-  "skill4-title": "تقنيات السحابة (AWS)",
-  "skill4-text": "AWS هو خياري الأول للتعامل مع <mark>المشاريع واسعة النطاق</mark>، حيث يوفر <mark>المرونة</mark> لتجربة أدوات وأساليب مختلفة داخل نظام بيئي واحد. سواء كان ذلك باستخدام <mark>EC2</mark> للحوسبة القابلة للتطوير أو <mark>S3</mark> للتخزين الفعال أو <mark>SageMaker</mark> للتعلم الآلي، فإن AWS تتيح لي إدارة الموارد بسلاسة وأتمتة تدفقات العمل و<mark>نشر النماذج</mark> دون قيود البنية التحتية. تجعلها قابلية التكيف ضرورية للتعامل مع تحديات علم البيانات المعقدة بكفاءة وقابلية للتوسع.",
+        // Skills
+        "skills-heading": "المهارات",
+        "skill1-title": "بايثون",
+        "skill1-text": "تُعد بايثون <mark>أداة شاملة</mark> في مجال علم البيانات، فهي تغطي كل شيء من معالجة البيانات <mark>(pandas, NumPy)</mark> إلى التعلم الآلي <mark>(scikit-learn, TensorFlow)</mark> وتحليل السلاسل الزمنية <mark>(statsmodels, prophet)</mark>. إنها تُبسِّط عمليات المعالجة المسبقة للبيانات، والعرض المرئي، والنمذجة، مما يجعل من السهل استكشاف الرؤى وبناء النماذج التنبؤية وأتمتة سير العمل. إن نظامها البيئي الواسع ومرونتها يجعلانها لا غنى عنها للتعامل مع أي مشكلة تعتمد على البيانات بكفاءة.",
+        "skill2-title": "تصور البيانات",
+        "skill2-text": "يُعد تصور البيانات ضروريًا <mark>لاكتشاف الأنماط والاتجاهات والرؤى في مجموعات البيانات المعقدة</mark>، مما يتيح اتخاذ قرارات أفضل والتواصل الفعّال. يساعد ذلك الشركات على <mark>تحسين</mark> استراتيجياتها وزيادة الكفاءة ودفع الابتكار من خلال جعل البيانات أكثر سهولة وقابلة للتنفيذ.",
+        "skill3-title": "التعلم الآلي",
+        "skill3-text": "يُعتبر <mark>التعلم العميق</mark> جزءًا أساسيًا من رحلتي في علم البيانات، حيث يسمح لي <mark>ببناء نماذج قوية</mark> للتعرف على الأنماط والتنبؤ بالسلاسل الزمنية واتخاذ القرارات المعقدة. وباستخدام أُطر مثل <mark>TensorFlow وPyTorch</mark>، أطور شبكات عصبية تعمل على أتمتة استخلاص الميزات وتعزيز الدقة التنبؤية.",
+        "skill4-title": "تقنيات السحابة (AWS)",
+        "skill4-text": "AWS هو خياري الأول للتعامل مع <mark>المشاريع واسعة النطاق</mark>، حيث يوفر <mark>المرونة</mark> لتجربة أدوات وأساليب مختلفة داخل نظام بيئي واحد. سواء كان ذلك باستخدام <mark>EC2</mark> للحوسبة القابلة للتطوير أو <mark>S3</mark> للتخزين الفعال أو <mark>SageMaker</mark> للتعلم الآلي، فإن AWS تتيح لي إدارة الموارد بسلاسة وأتمتة تدفقات العمل و<mark>نشر النماذج</mark> دون قيود البنية التحتية. تجعلها قابلية التكيف ضرورية للتعامل مع تحديات علم البيانات المعقدة بكفاءة وقابلية للتوسع.",
 
-  // Contact
-  "contact-title": "اتصل بي"
-}
-
+        // Contact
+        "contact-title": "اتصل بي",
+      }
     };
 
-    // Switch content based on selected language
-    document.getElementById('languageSelector').addEventListener('change', function() {
-      const selectedLang = this.value;
+    document
+      .getElementById("languageSelector")
+      .addEventListener("change", function () {
+        const selectedLang = this.value;
 
-      // Navbar
-      document.getElementById('nav-home').innerHTML = translations[selectedLang]['nav-home'];
-      document.getElementById('nav-about').innerHTML = translations[selectedLang]['nav-about'];
-      document.getElementById('nav-projects').innerHTML = translations[selectedLang]['nav-projects'];
-      document.getElementById('nav-skills').innerHTML = translations[selectedLang]['nav-skills'];
-      document.getElementById('nav-contact').innerHTML = translations[selectedLang]['nav-contact'];
+        // Navbar
+        document.getElementById("nav-home").innerHTML =
+          translations[selectedLang]["nav-home"];
+        document.getElementById("nav-about").innerHTML =
+          translations[selectedLang]["nav-about"];
+        document.getElementById("nav-projects").innerHTML =
+          translations[selectedLang]["nav-projects"];
+        document.getElementById("nav-skills").innerHTML =
+          translations[selectedLang]["nav-skills"];
+        document.getElementById("nav-contact").innerHTML =
+          translations[selectedLang]["nav-contact"];
 
-      // About
-      document.getElementById('about-title').innerHTML = translations[selectedLang]['about-title'];
-      document.getElementById('about-p1').innerHTML = translations[selectedLang]['about-p1'];
-      document.getElementById('about-p2').innerHTML = translations[selectedLang]['about-p2'];
-      document.getElementById('about-p3').innerHTML = translations[selectedLang]['about-p3'];
+        // About
+        document.getElementById("about-title").innerHTML =
+          translations[selectedLang]["about-title"];
+        document.getElementById("about-p1").innerHTML =
+          translations[selectedLang]["about-p1"];
+        document.getElementById("about-p2").innerHTML =
+          translations[selectedLang]["about-p2"];
+        document.getElementById("about-p3").innerHTML =
+          translations[selectedLang]["about-p3"];
 
-      // Projects
-      document.getElementById('projects-title').innerHTML = translations[selectedLang]['projects-title'];
-      document.getElementById('project1-title').innerHTML = translations[selectedLang]['project1-title'];
-      document.getElementById('project1-text').innerHTML = translations[selectedLang]['project1-text'];
-      document.getElementById('project2-title').innerHTML = translations[selectedLang]['project2-title'];
-      document.getElementById('project2-text').innerHTML = translations[selectedLang]['project2-text'];
-      document.getElementById('project3-title').innerHTML = translations[selectedLang]['project3-title'];
-      document.getElementById('project3-text').innerHTML = translations[selectedLang]['project3-text'];
+        // Projects
+        document.getElementById("projects-title").innerHTML =
+          translations[selectedLang]["projects-title"];
+        document.getElementById("project1-title").innerHTML =
+          translations[selectedLang]["project1-title"];
+        document.getElementById("project1-text").innerHTML =
+          translations[selectedLang]["project1-text"];
+        document.getElementById("project2-title").innerHTML =
+          translations[selectedLang]["project2-title"];
+        document.getElementById("project2-text").innerHTML =
+          translations[selectedLang]["project2-text"];
+        document.getElementById("project3-title").innerHTML =
+          translations[selectedLang]["project3-title"];
+        document.getElementById("project3-text").innerHTML =
+          translations[selectedLang]["project3-text"];
 
-      // Skills
-      document.getElementById('skills-heading').innerHTML = translations[selectedLang]['skills-heading'];
-      document.getElementById('skill1-title').innerHTML = translations[selectedLang]['skill1-title'];
-      document.getElementById('skill1-text').innerHTML = translations[selectedLang]['skill1-text'];
-      document.getElementById('skill2-title').innerHTML = translations[selectedLang]['skill2-title'];
-      document.getElementById('skill2-text').innerHTML = translations[selectedLang]['skill2-text'];
-      document.getElementById('skill3-title').innerHTML = translations[selectedLang]['skill3-title'];
-      document.getElementById('skill3-text').innerHTML = translations[selectedLang]['skill3-text'];
-      document.getElementById('skill4-title').innerHTML = translations[selectedLang]['skill4-title'];
-      document.getElementById('skill4-text').innerHTML = translations[selectedLang]['skill4-text'];
+        // Skills
+        document.getElementById("skills-heading").innerHTML =
+          translations[selectedLang]["skills-heading"];
+        document.getElementById("skill1-title").innerHTML =
+          translations[selectedLang]["skill1-title"];
+        document.getElementById("skill1-text").innerHTML =
+          translations[selectedLang]["skill1-text"];
+        document.getElementById("skill2-title").innerHTML =
+          translations[selectedLang]["skill2-title"];
+        document.getElementById("skill2-text").innerHTML =
+          translations[selectedLang]["skill2-text"];
+        document.getElementById("skill3-title").innerHTML =
+          translations[selectedLang]["skill3-title"];
+        document.getElementById("skill3-text").innerHTML =
+          translations[selectedLang]["skill3-text"];
+        document.getElementById("skill4-title").innerHTML =
+          translations[selectedLang]["skill4-title"];
+        document.getElementById("skill4-text").innerHTML =
+          translations[selectedLang]["skill4-text"];
 
-      // Contact
-      document.getElementById('contact-title').innerHTML = translations[selectedLang]['contact-title'];
+        // Contact
+        document.getElementById("contact-title").innerHTML =
+          translations[selectedLang]["contact-title"];
 
-      // Update the lang attribute
-      document.documentElement.lang = selectedLang;
-      // Toggle RTL for Arabic
-      document.body.classList.toggle('rtl', selectedLang === 'ar');
-    });
+        // Update the lang attribute
+        document.documentElement.lang = selectedLang;
+        // Toggle RTL for Arabic
+        document.body.classList.toggle("rtl", selectedLang === "ar");
+      });
   </script>
 </body>
-<div id="chat-widget">
-  <div id="chat-output" style="max-height: 200px; overflow-y: auto; font-size: 14px;"></div>
-  <input type="text" id="user-input" placeholder="Ask me anything about Amine...">
-  <button onclick="sendMessage()">Send</button>
-</div>
 </html>
